@@ -59,8 +59,10 @@ EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
     console.log('EchoCharacteristic - onWriteRequest: value = ' + a);
 
 
+    var _this = this;
     if (a == '0001') {
         async.series([execCmd], function(err, result) {
+            _this._value = result;
             if (this._updateValueCallback) {
                 console.log('EchoCharacteristic - onWriteRequest: notifying');
                 if (result instanceof Array) {
@@ -72,7 +74,6 @@ EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
             callback(this.RESULT_SUCCESS);
         })
     }
-
 
 };
 
