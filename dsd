@@ -6,3 +6,5 @@ https://scottontechnology.com/open-multiple-images-opencv-python/
 from glob import glob
 for fn in glob('*.png'):
      im = cv2.imread(fn)
+
+images = [cv2.imread(file) for file in glob.glob("path/to/files/*.png")]
