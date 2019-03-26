@@ -8,3 +8,5 @@ for fn in glob('*.png'):
      im = cv2.imread(fn)
 
 images = [cv2.imread(file) for file in glob.glob("path/to/files/*.png")]
+
+http://vision.ucsd.edu/datasets/yale_face_dataset_original/yalefaces.zip
