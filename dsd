@@ -3,3 +3,6 @@ https://blog.csdn.net/u014696921/article/details/65448222
 https://www.learnopencv.com/read-an-image-in-opencv-python-cpp/
 https://stackoverflow.com/questions/33369832/read-multiple-images-on-a-folder-in-opencv-python
 https://scottontechnology.com/open-multiple-images-opencv-python/
+from glob import glob
+for fn in glob('*.png'):
+     im = cv2.imread(fn)
