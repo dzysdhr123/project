@@ -1,12 +1,1 @@
-https://blog.csdn.net/autoliuweijie/article/details/51911289
-https://blog.csdn.net/u014696921/article/details/65448222
-https://www.learnopencv.com/read-an-image-in-opencv-python-cpp/
-https://stackoverflow.com/questions/33369832/read-multiple-images-on-a-folder-in-opencv-python
-https://scottontechnology.com/open-multiple-images-opencv-python/
-from glob import glob
-for fn in glob('*.png'):
-     im = cv2.imread(fn)
-
-images = [cv2.imread(file) for file in glob.glob("path/to/files/*.png")]
-
-http://vision.ucsd.edu/datasets/yale_face_dataset_original/yalefaces.zip
+https://blog.csdn.net/Xingyb14/article/details/81329833#9-%E5%88%A9%E7%94%A8-matlab-%E7%AD%89%E8%BD%AF%E4%BB%B6%E7%BB%98%E5%9B%BE
