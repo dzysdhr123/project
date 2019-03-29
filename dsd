@@ -6,3 +6,4 @@ Time = cv2.getTickCount()
 
 Time = cv2.getTickCount() - Time       #;  #计算运行时间
 print( "run time = ", Time /cv2.getTickFrequency() ) 
+https://blog.csdn.net/qq_40818798/article/details/84780738
