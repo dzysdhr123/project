@@ -1,3 +1,4 @@
+
 var util = require('util');
 var async = require('async');
 var bleno = require('../..');
@@ -21,8 +22,8 @@ var EchoCharacteristic = function() {
 
 util.inherits(EchoCharacteristic, BlenoCharacteristic);
 
-/*���function�����Լ��ӵ� exeCcmd����*/
-var execCmd = function() {
+
+var execCmd = function(callback) {
 
     var final_res = 0;
     var end_flag = false;
@@ -33,7 +34,7 @@ var execCmd = function() {
         }
         json = JSON.parse(stdout);
 
-        if (json == '0001') {
+        if (json != 0) {
             console.log('Face Recognition: Yes!!' + json);
         }
         final_res = json.toString(16);;
@@ -44,6 +45,48 @@ var execCmd = function() {
 
 }
 
+var execCmd2 = function(callback) {
+
+    var final_res2 = 0;
+    var end_flag = false;
+    exec('python3.5 dataset.py ' + cmds[no++], function(error, stdout, stderr) {
+        if (error) {
+            console.error('error: ' + error);
+            return;
+        }
+        json = JSON.parse(stdout);
+
+        if (json = 1) {
+            console.log('New Faces has been added!! there are total faces=' + json);
+        }
+        final_res2 = json.toString(16);
+        end_flag = true;
+        callback(null, final_res2)
+    });
+
+}
+
+
+var execCmd3 = function(callback) {
+
+    var final_res3 = 0;
+    var end_flag = false;
+    exec('python3.5 dataset.py ' + cmds[no++], function(error, stdout, stderr) {
+        if (error) {
+            console.error('error: ' + error);
+            return;
+        }
+        json = JSON.parse(stdout);
+
+        if (json = 1) {
+            console.log('New Faces has been added!! there are total faces=' + json);
+        }
+        final_res3 = json.toString(16);
+        end_flag = true;
+        callback(null, final_res2)
+    });
+
+}
 
 EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
     console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('hex'));
@@ -63,17 +106,28 @@ EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResp
     if (a == '0001') {
         async.series([execCmd], function(err, result) {
             _this._value = result;
-            if (this._updateValueCallback) {
-                console.log('EchoCharacteristic - onWriteRequest: notifying');
-                if (result instanceof Array) {
-                    this._updateValueCallback(result[0]);
-                } else {
-                    this._updateValueCallback(result);
-                }
-            }
             callback(this.RESULT_SUCCESS);
         })
-    }
+    } else if (a == '0002') {
+            async.series([execCmd2], function(err, result) {
+            _this._value = result;
+            callback(this.RESULT_SUCCESS);
+        });
+    } else if (a == '0003') {
+            async.series([execCmd3], function(err, result) {
+            _this._value = result;
+            callback(this.RESULT_SUCCESS);
+        });
+    } 
+    
+
+
+
+
+
+
+
+
 
 };
 
